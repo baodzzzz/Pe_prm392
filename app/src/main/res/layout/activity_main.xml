@@ -8,151 +8,133 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="177dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="30dp"
-        android:text="Student management"
         android:textAlignment="center"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="Job Management"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="235dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
+    <EditText
+        android:id="@+id/jobId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:ems="10"
+        android:hint="id"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:importantForAutofill="no" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="id" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
-        android:layout_width="235dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="50dp"
+    <EditText
+        android:id="@+id/jobName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout3"
+        android:ems="10"
+        android:hint="name"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/jobId"
+        android:importantForAutofill="no" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="fullname" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
-        android:layout_width="235dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="50dp"
+    <EditText
+        android:id="@+id/jobStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout4"
+        android:ems="10"
+        android:hint="status"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/jobName"
+        android:importantForAutofill="no" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="birthday" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout4"
-        android:layout_width="235dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="50dp"
+    <EditText
+        android:id="@+id/jobDes"
+        android:layout_width="212dp"
+        android:layout_height="52dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="50dp"
+        android:ems="10"
+        android:hint="description"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="average score" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/jobStatus" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="10dp"
-        android:text="Add"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        android:layout_marginTop="30dp"
+        android:hint="Add"
+        android:onClick="addJob"
+        app:layout_constraintEnd_toStartOf="@+id/btUpdate"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
+        app:layout_constraintTop_toBottomOf="@+id/jobDes" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="10dp"
-        android:text="Update"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
-        app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
+        android:layout_marginTop="30dp"
+        android:onClick="editJob"
+        android:hint="Update"
+        app:layout_constraintEnd_toStartOf="@+id/btDelete"
+        app:layout_constraintStart_toEndOf="@+id/btAdd"
+        app:layout_constraintTop_toBottomOf="@+id/jobDes" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="10dp"
-        android:text="Delete"
-        app:layout_constraintEnd_toStartOf="@+id/button4"
-        app:layout_constraintStart_toEndOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
+        android:layout_marginTop="30dp"
+        android:onClick="deleteJob"
+        android:hint="Delete"
+        app:layout_constraintEnd_toStartOf="@+id/btList"
+        app:layout_constraintStart_toEndOf="@+id/btUpdate"
+        app:layout_constraintTop_toBottomOf="@+id/jobDes" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="10dp"
-        android:text="List"
+        android:layout_marginTop="30dp"
+        android:onClick="listJob"
+        android:hint="List"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
+        app:layout_constraintStart_toEndOf="@+id/btDelete"
+        app:layout_constraintTop_toBottomOf="@+id/jobDes" />
 
-    <ListView
-        android:layout_width="409dp"
-        android:layout_height="104dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/messText" />
+
+    <TextView
+        android:id="@+id/messText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btAdd" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
