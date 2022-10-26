@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("NGO QUOC BAO - HE150436");
         setContentView(R.layout.activity_main);
         jobId = findViewById(R.id.jobId);
         jobName = findViewById(R.id.jobName);
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         String sql = "SELECT * FROM Job WHERE name LIKE ? AND status LIKE ? and description LIKE ?";
         String[] params;
         if (!jobId.getText().toString().equals("")) {
-            sql += " AND Id LIKE ?";
+            sql += " AND Id LIKE ? ";
             params = new String[]{
                     "%" + jobName.getText().toString() + "%",
                     "%" + jobStatus.getText().toString() + "%",
@@ -174,6 +174,9 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "Please enter job id...", Toast.LENGTH_SHORT).show();
         }
+    }
+    private void clickItem(View v) {
+        Toast.makeText(getApplicationContext(), "DA DUOC CLICK", Toast.LENGTH_SHORT).show();
     }
 
 }
