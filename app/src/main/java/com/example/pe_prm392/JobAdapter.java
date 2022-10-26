@@ -29,7 +29,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobHolder> {
         Job job = jobList.get(position);
         String result = "\tid: " + job.getId() + ",\tname: " + job.getName() + ", \tstatus: "
                 + job.getStatus() + ", \tdescription: " + job.getDescription() + ".";
-        holder.tv_job.setText(result);
+        holder.itemJob.setText(result);
     }
 
     @Override
@@ -38,11 +38,11 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobHolder> {
     }
 
     public class JobHolder extends RecyclerView.ViewHolder {
-        TextView tv_job;
+        TextView itemJob;
 
         public JobHolder(@NonNull View itemView) {
             super(itemView);
-            tv_job = itemView.findViewById(R.id.tv_job);
+            itemJob = itemView.findViewById(R.id.itemJob);
         }
     }
 }

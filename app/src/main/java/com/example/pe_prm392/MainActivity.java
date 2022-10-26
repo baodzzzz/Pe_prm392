@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         messText = findViewById(R.id.messText);
     }
 
-    public boolean searchJob(String id) {
+    public boolean checkJob(String id) {
         helper = new DbHelper(this, null);
         db = helper.getWritableDatabase();
         String sql = "SELECT * FROM Job WHERE Id LIKE " + "\"" + jobId.getText().toString() + "\"";
@@ -63,8 +64,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void addJob(View v) {
         String id = jobId.getText().toString();
-        if (!id.equals("")) {
-            if (!searchJob(jobId.getText().toString())) {
+        String name = jobName.getText().toString();
+        String status = jobStatus.getText().toString();
+        String des = jobDes.getText().toString();
+        if (!id.equals("") && !name.equals("") && !status.equals("") && !des.equals("")) {
+            if (!checkJob(jobId.getText().toString())) {
                 helper = new DbHelper(this, null);
                 db = helper.getWritableDatabase();
 
@@ -76,26 +80,29 @@ public class MainActivity extends AppCompatActivity {
                         jobDes.getText().toString(),
                 });
                 db.close();
-                messText.setText("\tJob has been added.");
+                Toast.makeText(getApplicationContext(), "\tJob has been added.", Toast.LENGTH_SHORT).show();
                 jobId.setText("");
                 jobName.setText("");
                 jobStatus.setText("");
                 jobDes.setText("");
             } else {
-                messText.setText("\tJob id duplicate!!!");
+                Toast.makeText(getApplicationContext(), "Job id duplicate!!!", Toast.LENGTH_SHORT).show();
                 jobId.setText("");
                 jobName.setText("");
                 jobStatus.setText("");
                 jobDes.setText("");
             }
         } else {
-            messText.setText("\tPlease enter all the data..");
+            Toast.makeText(getApplicationContext(), "Please enter the data...", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void editJob(View v) {
         String id = jobId.getText().toString();
-        if (!id.equals("")) {
+        String name = jobName.getText().toString();
+        String status = jobStatus.getText().toString();
+        String des = jobDes.getText().toString();
+        if (!id.equals("") && !name.equals("") && !status.equals("") && !des.equals("")) {
             helper = new DbHelper(this, null);
             db = helper.getWritableDatabase();
             String sql = "UPDATE Job SET name = ?, status = ?, description = ? WHERE Id = ?";
@@ -106,17 +113,33 @@ public class MainActivity extends AppCompatActivity {
                     jobId.getText().toString(),
             });
             db.close();
-            messText.setText("\tUpdate Successfully!!!");
+            Toast.makeText(getApplicationContext(), "Update Successfully!!!", Toast.LENGTH_SHORT).show();
         } else {
-            messText.setText("\tPlease enter all the data..");
+            Toast.makeText(getApplicationContext(), "Please enter the data...", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void listJob(View v) {
         helper = new DbHelper(this, null);
         db = helper.getWritableDatabase();
-        String sql = "SELECT * FROM Job";
-        Cursor c = db.rawQuery(sql, null);
+        String sql = "SELECT * FROM Job WHERE name LIKE ? AND status LIKE ? and description LIKE ?";
+        String[] params;
+        if (!jobId.getText().toString().equals("")) {
+            sql += " AND Id LIKE ?";
+            params = new String[]{
+                    "%" + jobName.getText().toString() + "%",
+                    "%" + jobStatus.getText().toString() + "%",
+                    "%" + jobDes.getText().toString() + "%",
+                    jobId.getText().toString()
+            };
+        } else {
+            params = new String[]{
+                    "%" + jobName.getText().toString() + "%",
+                    "%" + jobStatus.getText().toString() + "%",
+                    "%" + jobDes.getText().toString() + "%",
+            };
+        }
+        Cursor c = db.rawQuery(sql, params);
 
         List<Job> jobList = new ArrayList<>();
         while (c.moveToNext()) {
@@ -129,8 +152,9 @@ public class MainActivity extends AppCompatActivity {
         }
         db.close();
 
-        messText.setText("\tList = " + jobList.size());
-
+        if (jobList.size() == 0) {
+            messText.setText("\tNo data found!!!!");
+        } else messText.setText("\tTotal List = " + jobList.size());
         JobAdapter adapter = new JobAdapter(jobList);
         RecyclerView rec = findViewById(R.id.rc_view);
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this);
@@ -143,12 +167,12 @@ public class MainActivity extends AppCompatActivity {
         if (!id.equals("")) {
             helper = new DbHelper(this, null);
             db = helper.getWritableDatabase();
-            db.delete("Job","Id =" + "\"" + id + "\"", null);
+            db.delete("Job", "Id =" + "\"" + id + "\"", null);
             db.close();
-            messText.setText("\tDelete Success!!!");
+            Toast.makeText(getApplicationContext(), "Delete Success!!!", Toast.LENGTH_SHORT).show();
             jobId.setText("");
         } else {
-            messText.setText("\tPlease enter job id..");
+            Toast.makeText(getApplicationContext(), "Please enter job id...", Toast.LENGTH_SHORT).show();
         }
     }
 
